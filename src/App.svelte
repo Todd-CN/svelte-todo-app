@@ -1,7 +1,8 @@
 <script>
   import { onMount } from "svelte";
-  import { fly } from "svelte/transition";
+  // import { fly } from "svelte/transition";
   import Logo from "./Logo.svelte";
+  import TodoItem from "./TodoItem.svelte";
 
   const ENTER_KEY = 13;
   const ESCAPE_KEY = 27;
@@ -9,32 +10,7 @@
   let currentFilter = "all";
   let tempId = 4;
   let newTodo = "";
-  let todos = [
-    {
-      id: 1,
-      completed: false,
-      title: "Go to Store",
-      editing: false,
-    },
-    {
-      id: 2,
-      completed: false,
-      title: "Clean dog",
-      editing: false,
-    },
-    {
-      id: 3,
-      completed: false,
-      title: "Write poem",
-      editing: false,
-    },
-    {
-      id: 4,
-      completed: false,
-      title: "Write on dog",
-      editing: false,
-    },
-  ];
+  let todos = [];
 
   function fetchTodos() {
     fetch("https://jsonplaceholder.typicode.com/todos/").then((response) => {
@@ -127,37 +103,8 @@
     on:keydown={addTodo}
   />
 
-  {#each filteredTodos as todo}
-    <div class="todo-item">
-      <div class="todo-item-left" transition:fly={{ y: 20, duration: 300 }}>
-        <input type="checkbox" bind:checked={todo.completed} />
-        {#if !todo.editing}
-          <div
-            class="todo-item-label"
-            class:completed={todo.completed}
-            on:dblclick={() => editTodo(todo)}
-          >
-            {todo.title}
-          </div>
-        {:else}
-          <input
-            class="todo-item-edit"
-            bind:value={todo.title}
-            type="text"
-            on:blur={() => doneEdit(todo)}
-            on:keydown={() => doneEditKeydown(todo, event)}
-            autofocus
-          />
-        {/if}
-      </div>
-      <div
-        class="remove-item"
-        on:click={deleteTodo(todo.id)}
-        transition:fly={{ x: 300, duration: 500 }}
-      >
-        &times;
-      </div>
-    </div>
+  {#each filteredTodos as currentTodo}
+    <TodoItem todo={currentTodo} />
   {/each}
 
   <div class="extra-container">
@@ -206,13 +153,6 @@
     font-size: 18px;
     margin-bottom: 16px;
   }
-  .todo-item {
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    animation-duration: 0.3s;
-  }
   .remove-item {
     cursor: pointer;
     margin-left: 14px;
@@ -220,15 +160,7 @@
       color: black;
     } */
   }
-  .todo-item-left {
-    display: flex;
-    align-items: center;
-  }
-  .todo-item-label {
-    padding: 10px;
-    border: 1px solid white;
-    margin-left: 12px;
-  }
+
   /* .todo-item-edit {
     font-size: 24px;
     color: #2c3e50;
