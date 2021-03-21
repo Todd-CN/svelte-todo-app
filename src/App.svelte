@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { fly } from "svelte/transition";
+  import Logo from "./Logo.svelte";
 
   const ENTER_KEY = 13;
   const ESCAPE_KEY = 27;
@@ -116,7 +117,7 @@
 <div class="container">
   <!-- 1. Make this img tag in a separate component
 	 2. Name the component 'Logo' -->
-  <img src={"/img/svelte-logo-horizontal.svg"} alt="svelte logo" class="logo" />
+  <Logo />
 
   <input
     type="text"
