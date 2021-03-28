@@ -1,9 +1,10 @@
 <script>
+  import { fly } from "svelte/transition";
   export let todo;
 </script>
 
 <div class="todo-item">
-  <div class="todo-item-left">
+  <div class="todo-item-left" transition:fly={{ y: 20, duration: 300 }}>
     <input type="checkbox" bind:checked={todo.completed} />
     <div class:completed={todo.completed} class="todo-item-label">
       {todo.title}

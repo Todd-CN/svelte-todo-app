@@ -1,6 +1,5 @@
 <script>
   import { onMount } from "svelte";
-  // import { fly } from "svelte/transition";
   import Logo from "./Logo.svelte";
   import TodoItem from "./TodoItem.svelte";
 
