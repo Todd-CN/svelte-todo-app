@@ -1,5 +1,6 @@
 <script>
   import { fly } from "svelte/transition";
+  export let onDelete;
   export let todo;
 </script>
 
@@ -10,6 +11,7 @@
       {todo.title}
     </div>
   </div>
+  <div class="remove-item" on:click={() => onDelete(todo.id)}>&times;</div>
 </div>
 
 <style>
@@ -31,5 +33,12 @@
   }
   .completed {
     text-decoration: line-through;
+  }
+  .remove-item {
+    cursor: pointer;
+    margin-left: 14px;
+    /* &:hover {
+      color: black;
+    } */
   }
 </style>

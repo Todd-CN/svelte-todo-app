@@ -56,6 +56,8 @@
   function deleteTodo(id) {
     todos = todos.filter((todo) => todo.id !== id);
   }
+  // filter returns a brand new array that filters only the items that match the condition we pass in
+  // filter doesn't mutate the original array (splice will modify the original)
 
   function clearCompleted() {
     todos = todos.filter((todo) => !todo.completed);
@@ -103,7 +105,7 @@
   />
 
   {#each filteredTodos as currentTodo}
-    <TodoItem todo={currentTodo} />
+    <TodoItem todo={currentTodo} onDelete={deleteTodo} />
   {/each}
 
   <div class="extra-container">
@@ -152,13 +154,6 @@
     font-size: 18px;
     margin-bottom: 16px;
   }
-  .remove-item {
-    cursor: pointer;
-    margin-left: 14px;
-    /* &:hover {
-      color: black;
-    } */
-  }
 
   /* .todo-item-edit {
     font-size: 24px;
@@ -172,10 +167,6 @@
       outline: none;
     } */
   /* } */
-  .completed {
-    text-decoration: line-through;
-    color: grey;
-  }
   .extra-container {
     display: flex;
     align-items: center;
