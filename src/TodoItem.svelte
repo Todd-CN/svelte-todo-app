@@ -5,7 +5,9 @@
 <div class="todo-item">
   <div class="todo-item-left">
     <input type="checkbox" bind:checked={todo.completed} />
-    <div class="todo-item-label">{todo.title}</div>
+    <div class:completed={todo.completed} class="todo-item-label">
+      {todo.title}
+    </div>
   </div>
 </div>
 
@@ -25,5 +27,8 @@
     padding: 10px;
     border: 1px solid white;
     margin-left: 12px;
+  }
+  .completed {
+    text-decoration: line-through;
   }
 </style>
