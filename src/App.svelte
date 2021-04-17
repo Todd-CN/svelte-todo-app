@@ -105,7 +105,15 @@
   />
 
   {#each filteredTodos as currentTodo}
-    <TodoItem todo={currentTodo} onDelete={deleteTodo} />
+    <TodoItem todo={currentTodo} onDelete={() => deleteTodo(currentTodo.id)} />
+    <!--
+         By calling onDelete{deleteTodo(currentTodo.id)}, you are executing the function immediately. That's not what you want.
+      -->
+    <!--
+        The reason onDelete{() => deleteTodo(currentTodo.id)} is "how it works", is because one needs to pass a reference to the function needing to be executed.
+        In other words, you need a function declaration, which will be invoked ONLY by the on:click/(onDelete in this example), and inside of the function declaration you 
+        can call your handler(deleteTodo in this example) with as many arguments/parameters as you want
+      -->
   {/each}
 
   <div class="extra-container">
