@@ -92,8 +92,6 @@
 </script>
 
 <div class="container">
-  <!-- 1. Make this img tag in a separate component
-	 2. Name the component 'Logo' -->
   <Logo />
 
   <input
@@ -104,7 +102,7 @@
     on:keydown={addTodo}
   />
 
-  {#each filteredTodos as currentTodo}
+  {#each todos as currentTodo}
     <TodoItem todo={currentTodo} onDelete={() => deleteTodo(currentTodo.id)} />
     <!--
          By calling onDelete{deleteTodo(currentTodo.id)}, you are executing the function immediately. That's not what you want.
