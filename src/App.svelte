@@ -100,7 +100,7 @@
   {#each todos as currentTodo}
     <TodoItem
       todo={currentTodo}
-      onDelete={(e) => deleteTodo(currentTodo.id)}
+      onDelete={deleteTodo}
     />
     <!--
          By calling onDelete{deleteTodo(currentTodo.id)}, you are executing the function immediately. That's not what you want.

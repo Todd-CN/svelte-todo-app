@@ -11,7 +11,7 @@
       {todo.title}
     </div>
   </div>
-  <div class="remove-item" on:click={onDelete}>&times;</div>
+  <div class="remove-item" on:click={() => onDelete(todo.id)}>&times;</div>
 </div>
 
 <style>
