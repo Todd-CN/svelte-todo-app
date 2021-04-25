@@ -55,6 +55,7 @@
 
   function deleteTodo(id) {
     todos = todos.filter((todo) => todo.id !== id);
+    console.log('deleteTodo called', id)
   }
   // filter returns a brand new array that filters only the items that match the condition we pass in
   // filter doesn't mutate the original array (splice will modify the original)
@@ -72,12 +73,6 @@
     currentFilter = filter;
   }
 
-  onMount(async () => {
-    const res = await fetch("https://api.kanye.rest");
-    const response = await res.json();
-    console.log(response.quote);
-  });
-
   $: todosRemaining = todos.filter((todo) => !todo.completed).length;
 
   // if the current filter is 'all', we are just going to return 'todos' (the default state)
@@ -87,8 +82,8 @@
     currentFilter === "all"
       ? todos
       : currentFilter === "completed"
-      ? todos.filter((todo) => todo.completed)
-      : todos.filter((todo) => !todo.completed);
+      ? todos.filter((currentTodo) => currentTodo.completed)
+      : todos.filter((currentTodo) => !currentTodo.completed);
 </script>
 
 <div class="container">
@@ -103,7 +98,10 @@
   />
 
   {#each todos as currentTodo}
-    <TodoItem todo={currentTodo} onDelete={() => deleteTodo(currentTodo.id)} />
+    <TodoItem
+      todo={currentTodo}
+      onDelete={(e) => deleteTodo(currentTodo.id)}
+    />
     <!--
          By calling onDelete{deleteTodo(currentTodo.id)}, you are executing the function immediately. That's not what you want.
       -->
