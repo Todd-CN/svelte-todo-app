@@ -24,8 +24,8 @@
   function addTodo(event) {
     if (event.which === ENTER_KEY) {
       todos = [
-        ...todos,
         { id: tempId, completed: false, title: newTodo, editing: false },
+        ...todos,
       ];
       // todos.push({
       //   id: tempId,
