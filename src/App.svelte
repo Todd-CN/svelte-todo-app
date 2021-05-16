@@ -1,5 +1,4 @@
 <script>
-  import { onMount } from "svelte";
   import Logo from "./Logo.svelte";
   import TodoItem from "./TodoItem.svelte";
 
@@ -24,14 +23,19 @@
 
   function addTodo(event) {
     if (event.which === ENTER_KEY) {
-      todos.push({
-        id: tempId,
-        completed: false,
-        title: newTodo,
-        editing: false,
-      });
+      todos = [
+        ...todos,
+        { id: tempId, completed: false, title: newTodo, editing: false },
+      ];
+      // todos.push({
+      //   id: tempId,
+      //   completed: false,
+      //   title: newTodo,
+      //   editing: false,
+      // });
 
-      todos = todos;
+      // todos = todos; // quirk of svelte- very specific to svelte - array mutable vs immutable - you telling svelte it that the 'todos' array is being changed
+      // whenever a variable changes in svelte- svelte knows to update the UI/html
       tempId = tempId + 1;
       newTodo = "";
     }
@@ -55,7 +59,7 @@
 
   function deleteTodo(id) {
     todos = todos.filter((todo) => todo.id !== id);
-    console.log('deleteTodo called', id)
+    console.log("deleteTodo called", id);
   }
   // filter returns a brand new array that filters only the items that match the condition we pass in
   // filter doesn't mutate the original array (splice will modify the original)
@@ -98,10 +102,7 @@
   />
 
   {#each todos as currentTodo}
-    <TodoItem
-      todo={currentTodo}
-      onDelete={deleteTodo}
-    />
+    <TodoItem todo={currentTodo} onDelete={deleteTodo} />
     <!--
          By calling onDelete{deleteTodo(currentTodo.id)}, you are executing the function immediately. That's not what you want.
       -->
