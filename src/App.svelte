@@ -22,21 +22,30 @@
   fetchTodos();
 
   function addTodo(event) {
+    console.log("addTodo called");
     if (event.which === ENTER_KEY) {
+      console.log("Enter key pressed", newTodo);
+
+      //non-mutating
       todos = [
         { id: tempId, completed: false, title: newTodo, editing: false },
         ...todos,
       ];
+
+      //mutating
       // todos.push({
       //   id: tempId,
       //   completed: false,
       //   title: newTodo,
       //   editing: false,
       // });
-
       // todos = todos; // quirk of svelte- very specific to svelte - array mutable vs immutable - you telling svelte it that the 'todos' array is being changed
       // whenever a variable changes in svelte- svelte knows to update the UI/html
+
+      //If we don't have this next line, all of the new todos would get set with the same ID
       tempId = tempId + 1;
+
+      // This ensures that the input text box goes back to an empty string after we add a new todo/ it resets it
       newTodo = "";
     }
   }
