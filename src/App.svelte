@@ -1,6 +1,7 @@
 <script>
   import Logo from "./Logo.svelte";
   import TodoItem from "./TodoItem.svelte";
+  import TestButton from "./TestButton.svelte";
 
   const ENTER_KEY = 13;
   const ESCAPE_KEY = 27;
@@ -144,6 +145,7 @@
         on:click={() => updateFilter("completed")}
         class:active={currentFilter === "completed"}>Completed</button
       >
+      <TestButton />
     </div>
 
     <div>
