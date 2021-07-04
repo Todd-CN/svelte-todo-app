@@ -4,6 +4,7 @@
   export let todo;
   export let onEdit;
   export let onEditCompleted;
+  const ENTER_KEY = 13;
 </script>
 
 <div class="todo-item">
@@ -15,6 +16,11 @@
         type="text"
         value={todo.title}
         on:blur={() => onEditCompleted(todo)}
+        on:keydown={(e) => {
+          if (e.which === ENTER_KEY) {
+            onEditCompleted(todo);
+          }
+        }}
         autofocus
       />
     {:else}

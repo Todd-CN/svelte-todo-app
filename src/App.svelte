@@ -51,22 +51,6 @@
     }
   }
 
-  // function editTodo(todo) {
-  //   todo.editing = true;
-  //   todos = todos;
-  // }
-
-  // function doneEdit(todo) {
-  //   todo.editing = false;
-  //   todos = todos;
-  // }
-
-  // function doneEditKeydown(todo, event) {
-  //   if (event.which === ENTER_KEY) {
-  //     doneEdit(todo);
-  //   }
-  // }
-
   function editTodo(todo) {
     todo.isEditing = true;
     todos = todos;
