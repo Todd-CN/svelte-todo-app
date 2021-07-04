@@ -27,7 +27,7 @@
     if (event.which === ENTER_KEY) {
       console.log("Enter key pressed", newTodo);
 
-      //non-mutating
+      //non-mutating - good practice to use this - svelte knows to update
       todos = [
         { id: tempId, completed: false, title: newTodo, editing: false },
         ...todos,
@@ -51,20 +51,31 @@
     }
   }
 
+  // function editTodo(todo) {
+  //   todo.editing = true;
+  //   todos = todos;
+  // }
+
+  // function doneEdit(todo) {
+  //   todo.editing = false;
+  //   todos = todos;
+  // }
+
+  // function doneEditKeydown(todo, event) {
+  //   if (event.which === ENTER_KEY) {
+  //     doneEdit(todo);
+  //   }
+  // }
+
   function editTodo(todo) {
-    todo.editing = true;
+    todo.isEditing = true;
     todos = todos;
+    // todos = [...todos]; usually used when you're ADDing to the array
   }
 
   function doneEdit(todo) {
-    todo.editing = false;
+    todo.isEditing = false;
     todos = todos;
-  }
-
-  function doneEditKeydown(todo, event) {
-    if (event.which === ENTER_KEY) {
-      doneEdit(todo);
-    }
   }
 
   function deleteTodo(id) {
@@ -112,7 +123,12 @@
   />
 
   {#each todos as currentTodo}
-    <TodoItem todo={currentTodo} onDelete={deleteTodo} />
+    <TodoItem
+      todo={currentTodo}
+      onDelete={deleteTodo}
+      onEdit={editTodo}
+      onEditCompleted={doneEdit}
+    />
     <!--
          By calling onDelete{deleteTodo(currentTodo.id)}, you are executing the function immediately. That's not what you want.
       -->
