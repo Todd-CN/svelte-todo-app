@@ -14,7 +14,7 @@
       <input
         class="todo-item-edit"
         type="text"
-        value={todo.title}
+        bind:value={todo.title}
         on:blur={() => onEditCompleted(todo)}
         on:keydown={(e) => {
           if (e.which === ENTER_KEY) {
