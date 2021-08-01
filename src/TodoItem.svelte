@@ -4,6 +4,7 @@
   export let todo;
   export let onEdit;
   export let onEditCompleted;
+  let tempTodo = todo.title;
   const ENTER_KEY = 13;
 </script>
 
@@ -14,10 +15,14 @@
       <input
         class="todo-item-edit"
         type="text"
-        bind:value={todo.title}
-        on:blur={() => onEditCompleted(todo)}
+        bind:value={tempTodo}
+        on:blur={() => {
+          tempTodo = todo.title;
+          onEditCompleted(todo);
+        }}
         on:keydown={(e) => {
           if (e.which === ENTER_KEY) {
+            todo.title = tempTodo;
             onEditCompleted(todo);
           }
         }}
